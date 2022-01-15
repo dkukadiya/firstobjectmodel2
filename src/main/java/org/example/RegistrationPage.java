@@ -1,42 +1,44 @@
 package org.example;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 
 public class RegistrationPage extends Utils
 {
+    LoadProp loadProp=new LoadProp();
     By _firstNamefiled=By.id("FirstName");
     By _lastNamefiled=By.id("LastName");
-    By _email=By.name("Email");
+    By _email=By.id("Email");
     By _password=By.id("Password");
     By _Confirmpassword=By.id("ConfirmPassword");
     //click on register button
     By _register=By.name("register-button");
+    By _selectDateOfBirth=By.name("DateOfBirthDay");
+    By _selectDateOfMonth=By.name("DateOfBirthMonth");
+    By _selectDateOfYear=By.name("DateOfBirthYear");
+
 
     public void usercanAddRegistrationDetails(){
-
         //Type Firstname
-        typetext(_firstNamefiled,"Viral");
+        typetext(_firstNamefiled,loadProp.getProperty("firstname"));
         // Type last name
-        typetext(_lastNamefiled,"Patel");
+        typetext(_lastNamefiled,loadProp.getProperty("lastname"));
         //select day from dropdown
-        Select selectDay = new Select(driver.findElement(By.name("DateOfBirthDay")));
-        selectDay.selectByVisibleText("15");
+        selectByVisibletext(_selectDateOfBirth,loadProp.getProperty("DOBDate"));
         //select month from dropdown
-        Select selectMonth = new Select(driver.findElement(By.name("DateOfBirthMonth")));
-        selectMonth.selectByValue("4");
+        selectByFromValue(_selectDateOfMonth,loadProp.getProperty("DOBMonth"));
         //select year from dropdown
-        Select selectYear=new Select(driver.findElement(By.name("DateOfBirthYear")));
-        selectYear.selectByValue("1923");
+        selectByVisibletext(_selectDateOfYear,loadProp.getProperty("DOBYear"));
         //Type email address
-        typetext(_email,"dkukadiya+"+ currentTimestamp() +"@gmail.com");
+        typetext(_email,loadProp.getProperty("email3")+ currentTimestamp() + loadProp.getProperty("email4"));
         //Type Password
-        typetext(_password,"viraj123");
+        typetext(_password,loadProp.getProperty("password"));
         //Type Confirm Password
-        typetext(_Confirmpassword ,"viraj123");
+        typetext(_Confirmpassword,loadProp.getProperty("confirmPassword"));
         //Click on register button
         waitForClickable(By.name("register-button"), 10);
         clickOnElement(_register);
-    }
-}
+    }}
+

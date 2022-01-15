@@ -19,6 +19,7 @@ public class TestSuite extends BaseTest
     public void verifyUserShouldbeabletoRegisterSuccesfully()
         {
              homepage.clickonRegisterButton();
+             captureScreenshot1();
              registrationPage.usercanAddRegistrationDetails();
              registrationResultPage.verifyUserShouldbeabletoRegisterSuccesfully();
         }
@@ -31,7 +32,7 @@ public class TestSuite extends BaseTest
 
     }
     @Test
- public void VerifyUserShouldBeAbleToNavigateToDesktopPage()
+    public void VerifyUserShouldBeAbleToNavigateToDesktopPage()
     {
         homepage.clickOnComputer();
         computerPage.clickOnDesktop();

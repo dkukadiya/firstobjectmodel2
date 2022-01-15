@@ -13,6 +13,4 @@ public class ComputerPage extends Utils
         waitForClickable(_clickonDesktopCategory, 30);
         clickOnElement(_clickonDesktopCategory);
     }
-
-
 }
