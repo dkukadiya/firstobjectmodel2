@@ -18,27 +18,27 @@ public class BrowserManager extends BasePage
     public static final String AUTOMATE_ACCESS_KEY = "zwmFapVWzc13V5XeQfqs";
     public static final String BrowserStackURL = "https://" + AUTOMATE_USERNAME + ":" + AUTOMATE_ACCESS_KEY + "@hub-cloud.browserstack.com/wd/hub";
     //String browserName="Chrome";
-     //boolean cloud=true;
+     boolean cloud=true;
 
     LoadProp loadProp=new LoadProp();
     DesiredCapabilities caps = new DesiredCapabilities();
+   // variable created as purpose of select different browser to run the test case
     public String browserName=System.getProperty("browser");
-     boolean cloud=Boolean.parseBoolean(System.getProperty("cloud"));
+     boolean browserStackURL =Boolean.parseBoolean(System.getProperty("cloud"));
      public void openBrowser() {
         //making decision cloud true or false
-        if (cloud)
+        if (browserStackURL )
             //this will  be run if cloud is true (in cloud)
-            {
-                //this will rin if cloud true
-                if (browserName.equalsIgnoreCase("chrome")) {
-                    caps.setCapability("os", "Windows");
-                    caps.setCapability("os_version", "7");
-                    caps.setCapability("browser", "Chrome");
-                    caps.setCapability("browser_version", "latest");
-                    caps.setCapability("browserstack.local", "false");
-                    caps.setCapability("browserstack.selenium_version", "3.14.0");
-                }
-             else if (browserName.equalsIgnoreCase("edge")) {
+        {
+            //this will rin if cloud true
+            if (browserName.equalsIgnoreCase("chrome")) {
+                caps.setCapability("os", "Windows");
+                caps.setCapability("os_version", "7");
+                caps.setCapability("browser", "Chrome");
+                caps.setCapability("browser_version", "latest");
+                caps.setCapability("browserstack.local", "false");
+                caps.setCapability("browserstack.selenium_version", "3.14.0");
+            } else if (browserName.equalsIgnoreCase("edge")) {
                 caps.setCapability("os", "Windows");
                 caps.setCapability("os_version", "11");
                 caps.setCapability("browser", "Edge");
@@ -58,12 +58,11 @@ public class BrowserManager extends BasePage
             }
             try {
                 driver = new RemoteWebDriver(new URL(BrowserStackURL), caps);
-            } catch (MalformedURLException e)
-            {
+            } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
-            }
-         else if (browserName.equalsIgnoreCase("chrome")) {
+        }else
+          if (browserName.equalsIgnoreCase("chrome")) {
                 System.setProperty("webdriver.chrome.driver", "src/test/java/driver/chromedriver.exe");
                 driver = new ChromeDriver();
             }else if(browserName.equalsIgnoreCase("edge"))
